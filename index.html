@@ -411,38 +411,32 @@
 
         ::-webkit-scrollbar-thumb:hover {
             background: linear-gradient(to bottom, #764ba2, #f093fb);
+            border-radius: 6px;
         }
     </style>
 </head>
 <body>
-    <!-- CONTENEDOR PRINCIPAL -->
     <div class="container">
-        <!-- HEADER -->
         <div class="header">
             <h1>✨ Galerías de Imágenes</h1>
-            <p>Fotografias del proyecto</p>
+            <p>Fotografías del proyecto</p>
             <div class="decorative-line"></div>
         </div>
 
-        <!-- SISTEMA DE PESTAÑAS -->
         <div class="tabs-container" id="tabsContainer"></div>
 
-        <!-- INFORMACIÓN DE CARPETA ACTIVA -->
         <div class="carpeta-info" id="carpetaInfo" style="display: none;">
             <h2 id="carpetaTitulo">Cargando...</h2>
             <p id="carpetaDescripcion"></p>
         </div>
 
-        <!-- LOADER -->
         <div class="loader-container active" id="loader">
             <div class="spinner"></div>
             <p class="loader-text">Cargando imágenes...</p>
         </div>
 
-        <!-- GALERÍA DE IMÁGENES -->
         <div class="galeria" id="galeria"></div>
 
-        <!-- MENSAJE DE ESTADO (ERROR O VACÍO) -->
         <div class="estado-mensaje" id="estadoMensaje">
             <div class="estado-icono" id="estadoIcono">📁</div>
             <div class="estado-texto">
@@ -451,7 +445,6 @@
             </div>
         </div>
 
-        <!-- FOOTER -->
         <div class="footer">
             <span id="contadorImagenes">0</span> imágenes en total
         </div>
@@ -459,7 +452,7 @@
 
     <script>
         // ================================================== 
-        // CONFIGURACIÓN - REEMPLAZA ESTO CON TU URL
+        // CONFIGURACIÓN - URL VERIFICADA
         // ================================================== 
         const URL_SCRIPT_EJECUTABLE = "https://script.google.com/macros/s/AKfycbxKspBtDO-Fxs6Twkbm9fF0lcxm1DVdYgpOf850ThgmkmFMt-D9hXgBjnW9o0wUK1bd1g/exec";
 
@@ -489,12 +482,7 @@
                 // Mostrar loader
                 mostrarLoader();
 
-                // Validar URL
-                if (URL_SCRIPT_EJECUTABLE === "https://script.google.com/macros/s/AKfycbxKspBtDO-Fxs6Twkbm9fF0lcxm1DVdYgpOf850ThgmkmFMt-D9hXgBjnW9o0wUK1bd1g/exec") {
-                    throw new Error("⚠️ Reemplaza URL_SCRIPT_EJECUTABLE con tu URL real");
-                }
-
-                // Hacer petición fetch
+                // Hacer petición fetch directamente con la URL
                 const respuesta = await fetch(URL_SCRIPT_EJECUTABLE);
 
                 // Verificar si la respuesta es correcta
@@ -505,7 +493,7 @@
                 // Parsear JSON
                 const datos = await respuesta.json();
 
-                // Validar respuesta
+                // Validar respuesta del backend
                 if (datos.estado !== 'éxito') {
                     throw new Error(datos.mensaje || "Error desconocido");
                 }
