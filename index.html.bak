@@ -1,0 +1,275 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BananIA - Inteligencia Artificial para el Cultivo Bananero</title>
+  <meta name="description"
+    content="Herramienta de inteligencia artificial para detectar y clasificar automÃ¡ticamente el estado fitosanitario de hojas de banano en fincas de exportaciÃ³n.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- ==========================================================================
+       BARRA DE NAVEGACIÃ“N FIJA REUTILIZABLE
+       ========================================================================== -->
+  <header class="main-navbar" id="navbar">
+    <div class="navbar-container">
+      <a href="index.html" class="navbar-brand">
+        <!-- Logotipo BananIA minimalista inline SVG -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="36" height="36" fill="none">
+          <circle cx="20" cy="20" r="18" fill="#E8EDE7" />
+          <path d="M12 28C15 14 26 10 29 11C31 12 30 16 26 21C22 26 15 29 12 28Z" fill="#70806A" opacity="0.85" />
+          <path d="M14 26C18 16 26 13 28 14" stroke="#3E2E21" stroke-width="1.8" stroke-linecap="round" />
+          <circle cx="25" cy="15" r="1.5" fill="#E2EDE0" />
+        </svg>
+        <span>BananIA</span>
+      </a>
+
+      <button class="navbar-toggle" id="navbarToggle" aria-label="Abrir menÃº de navegaciÃ³n" aria-expanded="false"
+        aria-controls="navbarMenu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="navbar-menu" id="navbarMenu">
+        <li><a href="index.html" class="navbar-link active">Inicio</a></li>
+        <li><a href="nosotros.html" class="navbar-link">Nosotros</a></li>
+        <li><a href="servicios.html" class="navbar-link">Servicios</a></li>
+        <li><a href="proyectos.html" class="navbar-link">Proyectos</a></li>
+        <li><a href="escaner.html" class="navbar-link">EscÃ¡ner IA</a></li>
+        <li><a href="mapa.html" class="navbar-link">Mapa</a></li>
+        <li><a href="galerias.html" class="navbar-link">GalerÃ­as</a></li>
+        <li><a href="contacto.html" class="navbar-link">Contacto</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       CONTENIDO PRINCIPAL - PÃGINA DE INICIO
+       ========================================================================== -->
+  <main class="main-content">
+    <!-- Hero Principal -->
+    <section class="hero-section">
+      <div class="hero-badge">ðŸŒ AgrÃ­cola 4.0 & VisiÃ³n Artificial</div>
+      <h1>Inteligencia Artificial para la Salud Bananera</h1>
+      <p>Escanea imÃ¡genes de hojas de banano en segundos para detectar daÃ±os y priorizar inspecciones de campo en fincas
+        de exportaciÃ³n.</p>
+      <div class="btn-group">
+        <a href="#simulador" class="btn btn-primary">Probar Simulador IA</a>
+        <a href="servicios.html" class="btn btn-secondary">Conocer SoluciÃ³n</a>
+      </div>
+      <div class="decorative-separator" style="margin-top: 45px;">
+        <span></span>
+        <i>ðŸƒ</i>
+        <span></span>
+      </div>
+    </section>
+
+    <!-- ProblemÃ¡tica vs SoluciÃ³n -->
+    <section class="section-header">
+      <h2>El DesafÃ­o en la ProducciÃ³n de ExportaciÃ³n</h2>
+      <p>La inspecciÃ³n manual tradicional no avanza al ritmo de las grandes plantaciones bananeras, generando pÃ©rdidas y
+        costos fitosanitarios elevados.</p>
+    </section>
+
+    <div class="comparison-grid">
+      <!-- Tarjeta ProblemÃ¡tica -->
+      <article class="comparison-card problem">
+        <span class="card-tag">ProblemÃ¡tica Actual</span>
+        <h3>InspecciÃ³n Manual y Reactiva</h3>
+        <p>La inspecciÃ³n visual por trabajadores agrÃ­colas presenta limitaciones crÃ­ticas en fincas de alta extensiÃ³n y
+          exigencia de exportaciÃ³n:</p>
+        <ul class="feature-list">
+          <li><i>â³</i> <strong>Lenta y poco escalable:</strong> Demora dÃ­as en cubrir hectÃ¡reas extensas.</li>
+          <li><i>ðŸ‘ï¸</i> <strong>Subjetiva:</strong> Depende totalmente de la experiencia visual del inspector.</li>
+          <li><i>âš ï¸</i> <strong>DetecciÃ³n reactiva:</strong> Cuando se detecta el daÃ±o, la enfermedad ya suele haberse
+            propagado.</li>
+          <li><i>ðŸ’¸</i> <strong>PÃ©rdidas econÃ³micas:</strong> Rechazos en control de calidad y quÃ­micos innecesarios.
+          </li>
+        </ul>
+      </article>
+
+      <!-- Tarjeta SoluciÃ³n -->
+      <article class="comparison-card solution">
+        <span class="card-tag">SoluciÃ³n BananIA</span>
+        <h3>DiagnÃ³stico InstantÃ¡neo con IA</h3>
+        <p>BananIA transforma la supervisiÃ³n agrÃ­cola mediante modelos de visiÃ³n artificial que analizan el estado de la
+          hoja de forma estandarizada:</p>
+        <ul class="feature-list">
+          <li><i>âš¡</i> <strong>Resultados en segundos:</strong> AutomatizaciÃ³n de inspecciÃ³n mediante imÃ¡genes de campo.
+          </li>
+          <li><i>ðŸŽ¯</i> <strong>Criterio objetivo:</strong> ClasificaciÃ³n precisa y constante sin sesgo humano.</li>
+          <li><i>ðŸ›¡ï¸</i> <strong>AcciÃ³n preventiva:</strong> Alertas tempranas antes de que la plaga o daÃ±o se propague.
+          </li>
+          <li><i>ðŸ“ˆ</i> <strong>Rentabilidad protegida:</strong> OptimizaciÃ³n de recursos y mayor porcentaje de cosecha
+            apta.</li>
+        </ul>
+      </article>
+    </div>
+
+    <!-- Las 3 CategorÃ­as DiagnÃ³sticas -->
+    <section class="section-header">
+      <h2>ClasificaciÃ³n AutomÃ¡tica en 3 CategorÃ­as</h2>
+      <p>Nuestro modelo procesa imÃ¡genes fotogrÃ¡ficas y categoriza inmediatamente cada muestra para guiar las acciones
+        del equipo tÃ©cnico.</p>
+    </section>
+
+    <div class="categories-grid">
+      <article class="category-card sana">
+        <div class="cat-icon">ðŸŸ¢</div>
+        <h3>Hoja Sana</h3>
+        <p>La hoja muestra un tejido clorofÃ­lico uniforme y vigoroso sin signos visibles de patologÃ­as fÃºngicas,
+          necrosis ni daÃ±os estructurales por plagas.</p>
+        <span class="cat-badge">âœ” CULTIVO EN ESTADO Ã“PTIMO</span>
+      </article>
+
+      <article class="category-card polvo">
+        <div class="cat-icon">ðŸŸ¤</div>
+        <h3>Con Polvo / Sedimento</h3>
+        <p>Identifica presencia superficial de polvo agrÃ­cola, ceniza o sedimentos que podrÃ­an afectar la fotosÃ­ntesis o
+          confundirse en inspecciones visuales con sÃ­ntomas patolÃ³gicos.</p>
+        <span class="cat-badge">â„¹ REQUIERE LIMPIEZA O MONITOREO</span>
+      </article>
+
+      <article class="category-card danada">
+        <div class="cat-icon">ðŸ”´</div>
+        <h3>Hoja DaÃ±ada</h3>
+        <p>Detecta anomalÃ­as visibles, estrÃ­as clorÃ³ticas, Ã¡reas necrÃ³ticas o lesiones que evidencian deterioro foliar o
+          enfermedades que exigen revisiÃ³n urgente.</p>
+        <span class="cat-badge">âš  ALERTA FITOSANITARIA INMEDIATA</span>
+      </article>
+    </div>
+
+    <!-- Simulador Interactivo BananIA -->
+    <section class="interactive-scanner" id="simulador">
+      <div class="scanner-grid">
+        <div class="scanner-info">
+          <span class="card-tag" style="background: rgba(255,255,255,0.15); color: #fff;">Simulador Interactivo</span>
+          <h3>EscÃ¡ner BananIA en Tiempo Real</h3>
+          <p>Selecciona una muestra de hoja para experimentar cÃ³mo nuestra red neuronal escanea y clasifica la imagen en
+            milisegundos para apoyar a los tÃ©cnicos en campo.</p>
+          <div class="scanner-controls">
+            <button class="scan-btn active" data-mode="sana">ðŸŸ¢ Probar Sana</button>
+            <button class="scan-btn" data-mode="polvo">ðŸŸ¤ Probar Con Polvo</button>
+            <button class="scan-btn" data-mode="danada">ðŸ”´ Probar DaÃ±ada</button>
+          </div>
+        </div>
+
+        <div class="scanner-demo-box">
+          <div class="leaf-preview" id="leafPreview">
+            <!-- SVG interactivo de hoja de banano -->
+            <svg class="leaf-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path id="leafSvgPath" d="M15 85C20 40 45 15 85 15C85 15 75 55 45 75C30 85 15 85 15 85Z" fill="#4caf50"
+                opacity="0.9" />
+              <path d="M15 85L85 15" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" opacity="0.6" />
+            </svg>
+            <div class="scan-laser"></div>
+          </div>
+          <div class="scan-result-panel">
+            <span class="scan-result-title" id="scanResultTitle">DiagnÃ³stico IA completado en 0.4s (Confianza:
+              98.2%)</span>
+            <span class="scan-result-badge" id="scanResultBadge" style="background-color: #e8f5e9; color: #2e7d32;">ðŸŸ¢
+              HOJA SANA</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Propuesta de Valor -->
+    <section class="section-header">
+      <h2>Propuesta de Valor para el Agroexportador</h2>
+      <p>Una herramienta diseÃ±ada por y para la eficiencia tecnolÃ³gica en el cultivo bananero.</p>
+    </section>
+
+    <div class="value-grid">
+      <article class="value-card">
+        <div class="value-icon">â±ï¸</div>
+        <h3>DetecciÃ³n MÃ¡s RÃ¡pida</h3>
+        <p>Acelera exponencialmente el ritmo de evaluaciÃ³n respecto a la inspecciÃ³n visual tradicional lÃ­nea por lÃ­nea
+          en campo.</p>
+      </article>
+
+      <article class="value-card">
+        <div class="value-icon">ðŸ“‰</div>
+        <h3>ReducciÃ³n de PÃ©rdidas</h3>
+        <p>Evita rechazos en empacadoras y frena la propagaciÃ³n al detectar focos problemÃ¡ticos en sus fases iniciales.
+        </p>
+      </article>
+
+      <article class="value-card">
+        <div class="value-icon">ðŸšœ</div>
+        <h3>Escalabilidad en Fincas</h3>
+        <p>Supervisa extensas hectÃ¡reas sin requerir incrementos proporcionales en los costos de personal o inspectores
+          en campo.</p>
+      </article>
+
+      <article class="value-card">
+        <div class="value-icon">ðŸ§¬</div>
+        <h3>EvoluciÃ³n hacia DiagnÃ³stico</h3>
+        <p>Arquitectura evolutiva preparada para incorporar detecciÃ³n especÃ­fica de patologÃ­as como Sigatoka negra o
+          Moko.</p>
+      </article>
+    </div>
+  </main>
+
+  <!-- ==========================================================================
+       PIE DE PÃGINA (FOOTER) REUTILIZABLE
+       ========================================================================== -->
+  <footer class="main-footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-info">
+          <a href="index.html" class="footer-logo">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="30" height="30" fill="none">
+              <circle cx="20" cy="20" r="18" fill="#E8EDE7" />
+              <path d="M12 28C15 14 26 10 29 11C31 12 30 16 26 21C22 26 15 29 12 28Z" fill="#70806A" opacity="0.85" />
+              <path d="M14 26C18 16 26 13 28 14" stroke="#3E2E21" stroke-width="1.8" stroke-linecap="round" />
+            </svg>
+            <span>BananIA</span>
+          </a>
+          <p class="footer-desc">Inteligencia artificial y visiÃ³n computacional aplicadas al diagnÃ³stico foliar para
+            proteger la rentabilidad y calidad del banano de exportaciÃ³n.</p>
+        </div>
+
+        <div class="footer-links-group">
+          <nav class="footer-column" aria-label="NavegaciÃ³n del footer">
+            <span class="footer-heading">NavegaciÃ³n</span>
+            <a href="index.html" class="footer-link">Inicio</a>
+            <a href="nosotros.html" class="footer-link">Nosotros</a>
+            <a href="servicios.html" class="footer-link">Servicios</a>
+            <a href="proyectos.html" class="footer-link">Proyectos</a>
+            <a href="escaner.html" class="footer-link">EscÃ¡ner IA</a>
+            <a href="mapa.html" class="footer-link">Mapa</a>
+            <a href="galerias.html" class="footer-link">GalerÃ­as</a>
+            <a href="contacto.html" class="footer-link">Contacto</a>
+          </nav>
+
+          <div class="footer-column">
+            <span class="footer-heading">SÃ­guenos</span>
+            <div class="footer-socials">
+              <a href="#" class="social-icon" aria-label="LinkedIn">In</a>
+              <a href="https://www.instagram.com/__johan26__/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram">Ig</a>
+              <a href="#" class="social-icon" aria-label="Twitter">X</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-copy">
+          &copy; <span id="footerYear"></span> BananIA by Equipo BioScanners (UTMACH). Todos los derechos reservados.
+        </div>
+        <div class="footer-counter">
+          <span>TecnologÃ­a AgrÃ­cola de ExportaciÃ³n</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
