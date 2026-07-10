@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería de Imágenes - Google Drive (3 Carpetas)</title>
+    
+    <style>
+        /* ================================================== */
+        /* ESTILOS GLOBALES Y RESET */
+        /* ================================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        /* ================================================== */
+        /* CONTENEDOR PRINCIPAL */
+        /* ================================================== */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* ================================================== */
+        /* HEADER Y TÍTULO */
+        /* ================================================== */
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #a8b5ff;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .decorative-line {
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #f093fb);
+            margin: 20px auto;
+            border-radius: 2px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        /* ================================================== */
+        /* SISTEMA DE PESTAÑAS */
+        /* ================================================== */
+        .tabs-container {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+            animation: slideDown 0.8s ease-out 0.2s both;
+        }
+
+        .tab-button {
+            padding: 14px 28px;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            color: white;
+            background: rgba(102, 126, 234, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .tab-button:hover {
+            transform: translateY(-4px);
+            background: rgba(102, 126, 234, 0.5);
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+        }
+
+        .tab-button.active {
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.6);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-color: #f093fb;
+        }
+
+        .tab-button[data-carpeta="galeria1"] {
+            --gradient: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .tab-button[data-carpeta="galeria2"] {
+            --gradient: linear-gradient(135deg, #f093fb, #e659c3);
+        }
+
+        .tab-button[data-carpeta="galeria3"] {
+            --gradient: linear-gradient(135deg, #13547a, #80d0c7);
+        }
+
+        .tab-button.active[data-carpeta="galeria2"] {
+            background: linear-gradient(135deg, #f093fb 0%, #e659c3 100%);
+        }
+
+        .tab-button.active[data-carpeta="galeria3"] {
+            background: linear-gradient(135deg, #13547a 0%, #80d0c7 100%);
+        }
+
+        .tab-name {
+            font-weight: 700;
+            display: block;
+            font-size: 1rem;
+        }
+
+        .tab-count {
+            font-size: 0.85rem;
+            opacity: 0.9;
+            display: block;
+            margin-top: 2px;
+        }
+
+        /* ================================================== */
+        /* INFORMACIÓN DE CARPETA */
+        /* ================================================== */
+        .carpeta-info {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .carpeta-info h2 {
+            font-size: 2rem;
+            color: #667eea;
+            margin-bottom: 8px;
+        }
+
+        .carpeta-info p {
+            font-size: 1.05rem;
+            color: #a8b5ff;
+            margin-bottom: 15px;
+        }
+
+        /* ================================================== */
+        /* LOADER / INDICADOR DE CARGA */
+        /* ================================================== */
+        .loader-container {
+            text-align: center;
+            padding: 60px 20px;
+            display: none;
+        }
+
+        .loader-container.active {
+            display: block;
+        }
+
+        .spinner {
+            border: 5px solid rgba(102, 126, 234, 0.2);
+            border-top: 5px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        .loader-text {
+            font-size: 1.1rem;
+            color: #a8b5ff;
+            font-weight: 500;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* ================================================== */
+        /* GALERÍA - GRID RESPONSIVO */
+        /* ================================================== */
+        .galeria {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            animation: fadeIn 0.6s ease-out;
+            min-height: 300px;
+        }
+
+        /* Tablet - 3 columnas */
+        @media (max-width: 1024px) {
+            .galeria {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+                gap: 20px;
+            }
+        }
+
+        /* Mobile - 2 columnas */
+        @media (max-width: 768px) {
+            .galeria {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            
+            .tabs-container {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .tab-button {
+                width: 100%;
+            }
+        }
+
+        /* Mobile pequeño - 1 columna */
+        @media (max-width: 480px) {
+            .galeria {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+        }
+
+        /* ================================================== */
+        /* TARJETA DE IMAGEN */
+        /* ================================================== */
+        .imagen-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            aspect-ratio: 1;
+            cursor: pointer;
+            animation: scaleIn 0.5s ease-out;
+        }
+
+        .imagen-card:nth-child(n) {
+            animation-delay: calc(0.05s * var(--index, 0));
+        }
+
+        .imagen-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(102, 126, 234, 0.4);
+        }
+
+        .imagen-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease-out;
+            display: block;
+        }
+
+        .imagen-card:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Overlay con info */
+        .imagen-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease-out;
+        }
+
+        .imagen-card:hover .imagen-overlay {
+            transform: translateY(0);
+        }
+
+        .imagen-nombre {
+            color: white;
+            font-size: 0.95rem;
+            font-weight: 600;
+            word-break: break-word;
+            white-space: normal;
+            max-height: 60px;
+            overflow: hidden;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* ================================================== */
+        /* MENSAJE DE ESTADO - ERROR O VACÍO */
+        /* ================================================== */
+        .estado-mensaje {
+            text-align: center;
+            padding: 80px 20px;
+            display: none;
+        }
+
+        .estado-mensaje.active {
+            display: block;
+        }
+
+        .estado-icono {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .estado-texto h2 {
+            font-size: 2rem;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .estado-texto p {
+            font-size: 1.1rem;
+            color: #a8b5ff;
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* ================================================== */
+        /* ANIMACIONES */
+        /* ================================================== */
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* ================================================== */
+        /* FOOTER */
+        /* ================================================== */
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(102, 126, 234, 0.2);
+            color: #a8b5ff;
+            font-size: 0.95rem;
+        }
+
+        .footer span {
+            display: inline-block;
+            color: #f093fb;
+            font-weight: 600;
+            margin: 0 5px;
+        }
+
+        /* ================================================== */
+        /* SCROLLBAR PERSONALIZADO */
+        /* ================================================== */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #667eea, #764ba2);
+            border-radius: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to bottom, #764ba2, #f093fb);
+        }
+    </style>
+</head>
+<body>
+    <!-- CONTENEDOR PRINCIPAL -->
+    <div class="container">
+        <!-- HEADER -->
+        <div class="header">
+            <h1>✨ Galerías de Imágenes</h1>
+            <p>Fotografias del proyecto</p>
+            <div class="decorative-line"></div>
+        </div>
+
+        <!-- SISTEMA DE PESTAÑAS -->
+        <div class="tabs-container" id="tabsContainer"></div>
+
+        <!-- INFORMACIÓN DE CARPETA ACTIVA -->
+        <div class="carpeta-info" id="carpetaInfo" style="display: none;">
+            <h2 id="carpetaTitulo">Cargando...</h2>
+            <p id="carpetaDescripcion"></p>
+        </div>
+
+        <!-- LOADER -->
+        <div class="loader-container active" id="loader">
+            <div class="spinner"></div>
+            <p class="loader-text">Cargando imágenes...</p>
+        </div>
+
+        <!-- GALERÍA DE IMÁGENES -->
+        <div class="galeria" id="galeria"></div>
+
+        <!-- MENSAJE DE ESTADO (ERROR O VACÍO) -->
+        <div class="estado-mensaje" id="estadoMensaje">
+            <div class="estado-icono" id="estadoIcono">📁</div>
+            <div class="estado-texto">
+                <h2 id="estadoTitulo">Sin imágenes</h2>
+                <p id="estadoTexto">No se encontraron imágenes en esta carpeta.</p>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <span id="contadorImagenes">0</span> imágenes en total
+        </div>
+    </div>
+
+    <script>
+        // ================================================== 
+        // CONFIGURACIÓN - REEMPLAZA ESTO CON TU URL
+        // ================================================== 
+        const URL_SCRIPT_EJECUTABLE = "https://script.google.com/macros/s/AKfycbyVBWtZ2bba_xIFYyzw1SFigmoEJFg3wnzsaNYeA7VEi5pY9Rki0Ld7gcoFzxpPQEVUog/exec";
+
+        // ================================================== 
+        // REFERENCIAS AL DOM
+        // ================================================== 
+        const tabsContainer = document.getElementById('tabsContainer');
+        const galeriaContainer = document.getElementById('galeria');
+        const loaderContainer = document.getElementById('loader');
+        const estadoMensajeContainer = document.getElementById('estadoMensaje');
+        const contadorImagenes = document.getElementById('contadorImagenes');
+        const carpetaInfo = document.getElementById('carpetaInfo');
+        const carpetaTitulo = document.getElementById('carpetaTitulo');
+        const carpetaDescripcion = document.getElementById('carpetaDescripcion');
+
+        // ================================================== 
+        // ESTADO GLOBAL
+        // ================================================== 
+        let datosGlobal = null;
+        let carpetaActiva = 'galeria1';
+
+        // ================================================== 
+        // FUNCIÓN PRINCIPAL - CARGAR IMÁGENES
+        // ================================================== 
+        async function cargarImagenes() {
+            try {
+                // Mostrar loader
+                mostrarLoader();
+
+                // Validar URL
+                if (URL_SCRIPT_EJECUTABLE === "TU_URL_DE_EJECUCION_AQUI") {
+                    throw new Error("⚠️ Reemplaza URL_SCRIPT_EJECUTABLE con tu URL real");
+                }
+
+                // Hacer petición fetch
+                const respuesta = await fetch(URL_SCRIPT_EJECUTABLE);
+
+                // Verificar si la respuesta es correcta
+                if (!respuesta.ok) {
+                    throw new Error(`Error HTTP: ${respuesta.status}`);
+                }
+
+                // Parsear JSON
+                const datos = await respuesta.json();
+
+                // Validar respuesta
+                if (datos.estado !== 'éxito') {
+                    throw new Error(datos.mensaje || "Error desconocido");
+                }
+
+                // Guardar datos globales
+                datosGlobal = datos;
+
+                // Crear pestañas
+                crearPestanas(datos.carpetas);
+
+                // Mostrar primera carpeta
+                mostrarCarpeta('galeria1');
+
+                ocultarLoader();
+
+            } catch (error) {
+                console.error('Error al cargar imágenes:', error);
+                mostrarMensajeError(error.message);
+                ocultarLoader();
+            }
+        }
+
+        // ================================================== 
+        // FUNCIÓN - CREAR PESTAÑAS
+        // ================================================== 
+        function crearPestanas(carpetas) {
+            tabsContainer.innerHTML = '';
+            
+            Object.keys(carpetas).forEach(clave => {
+                const config = carpetas[clave];
+                
+                const boton = document.createElement('button');
+                boton.className = 'tab-button';
+                if (clave === 'galeria1') boton.classList.add('active');
+                boton.dataset.carpeta = clave;
+                
+                boton.innerHTML = `
+                    <span class="tab-name">${config.nombre}</span>
+                    <span class="tab-count">${config.cantidad} imágenes</span>
+                `;
+                
+                boton.addEventListener('click', () => mostrarCarpeta(clave));
+                
+                tabsContainer.appendChild(boton);
+            });
+        }
+
+        // ================================================== 
+        // FUNCIÓN - MOSTRAR CARPETA
+        // ================================================== 
+        function mostrarCarpeta(clave) {
+            if (!datosGlobal) return;
+
+            // Actualizar pestaña activa
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-carpeta="${clave}"]`).classList.add('active');
+
+            carpetaActiva = clave;
+            const config = datosGlobal.carpetas[clave];
+
+            // Mostrar información de carpeta
+            carpetaTitulo.textContent = config.nombre;
+            carpetaDescripcion.textContent = config.descripcion || '';
+            carpetaInfo.style.display = 'block';
+
+            // Mostrar imágenes
+            if (!config.imagenes || config.imagenes.length === 0) {
+                mostrarMensajeEstado(
+                    '📁',
+                    'Sin imágenes',
+                    'No se encontraron imágenes en esta carpeta.'
+                );
+                actualizarContador();
+                return;
+            }
+
+            // Renderizar imágenes
+            renderizarImagenes(config.imagenes);
+            actualizarContador();
+        }
+
+        // ================================================== 
+        // FUNCIÓN - RENDERIZAR IMÁGENES EN GRID
+        // ================================================== 
+        function renderizarImagenes(imagenes) {
+            // Limpiar galería
+            galeriaContainer.innerHTML = '';
+
+            // Iterar sobre cada imagen
+            imagenes.forEach((imagen, index) => {
+                // Crear elemento card
+                const card = document.createElement('div');
+                card.className = 'imagen-card';
+                card.style.setProperty('--index', index);
+
+                // Crear imagen
+                const img = document.createElement('img');
+                img.src = imagen.url;
+                img.alt = imagen.nombre;
+                img.loading = 'lazy';
+
+                // Crear overlay
+                const overlay = document.createElement('div');
+                overlay.className = 'imagen-overlay';
+
+                const nombre = document.createElement('div');
+                nombre.className = 'imagen-nombre';
+                nombre.textContent = imagen.nombre;
+
+                overlay.appendChild(nombre);
+
+                // Agregar elementos a la card
+                card.appendChild(img);
+                card.appendChild(overlay);
+
+                // Agregar card a la galería
+                galeriaContainer.appendChild(card);
+
+                // Event listener para abrir imagen en nueva pestaña
+                card.addEventListener('click', () => {
+                    window.open(imagen.url, '_blank');
+                });
+            });
+
+            // Ocultar mensaje de estado
+            estadoMensajeContainer.classList.remove('active');
+        }
+
+        // ================================================== 
+        // FUNCIÓN - ACTUALIZAR CONTADOR
+        // ================================================== 
+        function actualizarContador() {
+            let total = 0;
+            if (datosGlobal) {
+                Object.values(datosGlobal.carpetas).forEach(carpeta => {
+                    total += carpeta.cantidad || 0;
+                });
+            }
+            contadorImagenes.textContent = total;
+        }
+
+        // ================================================== 
+        // FUNCIÓN - MOSTRAR/OCULTAR LOADER
+        // ================================================== 
+        function mostrarLoader() {
+            loaderContainer.classList.add('active');
+            galeriaContainer.innerHTML = '';
+            estadoMensajeContainer.classList.remove('active');
+            carpetaInfo.style.display = 'none';
+        }
+
+        function ocultarLoader() {
+            loaderContainer.classList.remove('active');
+        }
+
+        // ================================================== 
+        // FUNCIÓN - MOSTRAR MENSAJE DE ESTADO
+        // ================================================== 
+        function mostrarMensajeEstado(icono, titulo, texto) {
+            document.getElementById('estadoIcono').textContent = icono;
+            document.getElementById('estadoTitulo').textContent = titulo;
+            document.getElementById('estadoTexto').textContent = texto;
+            estadoMensajeContainer.classList.add('active');
+            galeriaContainer.innerHTML = '';
+        }
+
+        // ================================================== 
+        // FUNCIÓN - MOSTRAR ERROR
+        // ================================================== 
+        function mostrarMensajeError(mensaje) {
+            mostrarMensajeEstado(
+                '❌',
+                'Error al cargar',
+                mensaje || 'Ocurrió un error al cargar las imágenes. Verifica tu URL y permisos.'
+            );
+        }
+
+        // ================================================== 
+        // EJECUTAR AL CARGAR LA PÁGINA
+        // ================================================== 
+        document.addEventListener('DOMContentLoaded', cargarImagenes);
+
+        // Permitir recargar manualmente (opcional)
+        window.recargarGaleria = cargarImagenes;
+    </script>
+</body>
+</html>
