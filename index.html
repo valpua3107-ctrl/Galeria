@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -110,58 +110,60 @@
       </article>
     </div>
 
-    <!-- Las 3 Categorías Diagnósticas -->
+    <!-- Las 4 Categorías Diagnósticas — BananaScan v2.0 -->
     <section class="section-header">
-      <h2>Clasificación Automática en 3 Categorías</h2>
-      <p>Nuestro modelo procesa imágenes fotográficas y categoriza inmediatamente cada muestra para guiar las acciones
-        del equipo técnico.</p>
+      <h2>Clasificación Automática en 4 Categorías Clínicas</h2>
+      <p>BananaScan v2.0 (Dataset BananaLSD) procesa imágenes foliares y diagnostica patologías específicas del banano para guiar acciones agronómicas precisas.</p>
     </section>
 
     <div class="categories-grid">
       <article class="category-card sana">
-        <div class="cat-icon">🟢</div>
-        <h3>Hoja Sana</h3>
-        <p>La hoja muestra un tejido clorofílico uniforme y vigoroso sin signos visibles de patologías fúngicas,
-          necrosis ni daños estructurales por plagas.</p>
+        <div class="cat-icon">✅</div>
+        <h3>Planta Sana</h3>
+        <p>Hoja con coloración verde uniforme, sin estrías cloróticas ni halos necróticos. Continuar con fertilización y monitoreo preventivo.</p>
         <span class="cat-badge">✔ CULTIVO EN ESTADO ÓPTIMO</span>
       </article>
 
-      <article class="category-card polvo">
-        <div class="cat-icon">🟤</div>
-        <h3>Con Polvo / Sedimento</h3>
-        <p>Identifica presencia superficial de polvo agrícola, ceniza o sedimentos que podrían afectar la fotosíntesis o
-          confundirse en inspecciones visuales con síntomas patológicos.</p>
-        <span class="cat-badge">ℹ REQUIERE LIMPIEZA O MONITOREO</span>
+      <article class="category-card sigatoka">
+        <div class="cat-icon">🦠</div>
+        <h3>Sigatoka (Negra / Amarilla)</h3>
+        <p>Enfermedad foliar más devastadora del banano. Estrías cloróticas que evolucionan a manchas necróticas con centro gris y halo amarillo.</p>
+        <span class="cat-badge">⚠ ALERTA FITOSANITARIA CRÍTICA</span>
       </article>
 
-      <article class="category-card danada">
-        <div class="cat-icon">🔴</div>
-        <h3>Hoja Dañada</h3>
-        <p>Detecta anomalías visibles, estrías cloróticas, áreas necróticas o lesiones que evidencian deterioro foliar o
-          enfermedades que exigen revisión urgente.</p>
-        <span class="cat-badge">⚠ ALERTA FITOSANITARIA INMEDIATA</span>
+      <article class="category-card cordana">
+        <div class="cat-icon">🍂</div>
+        <h3>Mancha de Cordana</h3>
+        <p>Manchas ovaladas grandes en bordes foliares con centro marrón grisáceo y halo amarillo intenso. Asociada a exceso de humedad.</p>
+        <span class="cat-badge">🔧 REQUIERE MANEJO DE VENTILACIÓN</span>
+      </article>
+
+      <article class="category-card pestalotiopsis">
+        <div class="cat-icon">🍄</div>
+        <h3>Pestalotiopsis</h3>
+        <p>Lesiones café oscuro desde el ápice foliar en forma de "V". Hongo oportunista en plantas con estrés nutricional o daños mecánicos.</p>
+        <span class="cat-badge">🔧 REFORZAR NUTRICIÓN Y PODA</span>
       </article>
     </div>
 
-    <!-- Simulador Interactivo BananIA -->
+    <!-- Simulador Interactivo BananaScan v2.0 -->
     <section class="interactive-scanner" id="simulador">
       <div class="scanner-grid">
         <div class="scanner-info">
           <span class="card-tag" style="background: rgba(255,255,255,0.15); color: #fff;">Simulador Interactivo</span>
-          <h3>Escáner BananIA Simulación sin API (Solo Visual)</h3>
-          <p> Esta es una simulacion de como funciona el escáner BananIA:</p>
-          <p>Selecciona una muestra de hoja para experimentar cómo nuestra red neuronal escanea y clasifica la imagen en
-            milisegundos para apoyar a los técnicos en campo.</p>
+          <h3>BananaScan v2.0 — Simulación Visual</h3>
+          <p>Simulación de cómo el modelo de IA diagnostica patologías foliares del banano:</p>
+          <p>Selecciona una categoría para experimentar cómo la red neuronal clasifica cada enfermedad en milisegundos.</p>
           <div class="scanner-controls">
-            <button class="scan-btn active" data-mode="sana">🟢 Probar Sana</button>
-            <button class="scan-btn" data-mode="polvo">🟤 Probar Con Polvo</button>
-            <button class="scan-btn" data-mode="danada">🔴 Probar Dañada</button>
+            <button class="scan-btn active" data-mode="sana">✅ Sana</button>
+            <button class="scan-btn" data-mode="sigatoka">🦠 Sigatoka</button>
+            <button class="scan-btn" data-mode="cordana">🍂 Cordana</button>
+            <button class="scan-btn" data-mode="pestalotiopsis">🍄 Pestalotiopsis</button>
           </div>
         </div>
 
         <div class="scanner-demo-box">
           <div class="leaf-preview" id="leafPreview">
-            <!-- SVG interactivo de hoja de banano -->
             <svg class="leaf-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path id="leafSvgPath" d="M15 85C20 40 45 15 85 15C85 15 75 55 45 75C30 85 15 85 15 85Z" fill="#4caf50"
                 opacity="0.9" />
@@ -170,10 +172,8 @@
             <div class="scan-laser"></div>
           </div>
           <div class="scan-result-panel">
-            <span class="scan-result-title" id="scanResultTitle">Diagnóstico IA completado en 0.4s (Confianza:
-              98.2%)</span>
-            <span class="scan-result-badge" id="scanResultBadge" style="background-color: #e8f5e9; color: #2e7d32;">🟢
-              HOJA SANA</span>
+            <span class="scan-result-title" id="scanResultTitle">Diagnóstico IA completado en 0.4s (Confianza: 98.2%)</span>
+            <span class="scan-result-badge" id="scanResultBadge" style="background-color: #e8f5e9; color: #2e7d32;">✅ PLANTA SANA (HEALTHY)</span>
           </div>
         </div>
       </div>
@@ -209,9 +209,8 @@
 
       <article class="value-card">
         <div class="value-icon">🧬</div>
-        <h3>Evolución hacia Diagnóstico</h3>
-        <p>Arquitectura evolutiva preparada para incorporar detección específica de patologías como Sigatoka negra o
-          Moko.</p>
+        <h3>Diagnóstico Fitopatológico Específico</h3>
+        <p>BananaScan v2.0 ya identifica patologías específicas: Sigatoka, Cordana y Pestalotiopsis con recomendaciones agronómicas precisas.</p>
       </article>
     </div>
   </main>

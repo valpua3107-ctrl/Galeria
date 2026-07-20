@@ -189,51 +189,107 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     if (reportFeedback) reportFeedback.style.display = 'none';
 
-    if (resultContainer) resultContainer.className = ''; 
+    // Limpiar clases y estilos inline previos
+    if (resultContainer) {
+      resultContainer.className = '';
+      resultContainer.style.backgroundColor = '';
+      resultContainer.style.borderColor = '';
+    }
+    if (resultTitle) {
+      resultTitle.className = 'result-title';
+      resultTitle.style.color = '';
+    }
 
-    let estado = '';
     let porcentaje = Math.round(confidence * 100);
 
-    if (rawLabel.includes('sana')) {
-      estado = 'sana';
-      currentDiagnosis = 'Sana';
-      resultIcon.textContent = '🟢';
-      resultTitle.textContent = 'Hoja Sana';
+    // =====================================================================
+    // BananaScan v2.0 — 4 Categorías Foliares + Filtro no_banano
+    // Dataset: BananaLSD | Labels: healthy, sigatoka, cordana, pestalotiopsis
+    // =====================================================================
+
+    if (rawLabel.includes('healthy') || rawLabel.includes('sana') || rawLabel.includes('sano')) {
+      // ✅ HEALTHY — Planta Sana
+      currentDiagnosis = 'Healthy (Sana)';
+      resultIcon.textContent = '✅';
+      resultTitle.textContent = 'Planta Sana';
       resultContainer.classList.add('res-sana-bg');
       resultTitle.classList.add('res-sana');
-      resultRecommendation.innerHTML = '<strong>Recomendación:</strong> Mantener el régimen de fertilización estándar e incorporar al registro de vitalidad del sector agrícola.';
+      resultRecommendation.innerHTML = `
+        <strong>✅ Estado:</strong> Hoja de banano saludable, sin evidencia visual de patógenos fúngicos activos ni necrosis foliar.<br><br>
+        <strong>Características:</strong> Lámina foliar con coloración verde uniforme, sin estrías cloróticas ni halos necróticos significativos.<br><br>
+        <strong>🌱 Recomendación agronómica:</strong> Continúa con las labores normales de fertilización, riego balanceado y el monitoreo fitosanitario preventivo para mantener la productividad del racimo.
+      `;
     } 
-    else if (rawLabel.includes('polvo') || rawLabel.includes('sedimento')) {
-      estado = 'polvo';
-      currentDiagnosis = 'Con Polvo';
-      resultIcon.textContent = '🟤';
-      resultTitle.textContent = 'Con Polvo / Sedimento';
-      resultContainer.classList.add('res-polvo-bg');
-      resultTitle.classList.add('res-polvo');
-      resultRecommendation.innerHTML = '<strong>Recomendación:</strong> Programar limpieza o riego foliar para evitar obstrucción estomática y pérdida fotosintética.';
+    else if (rawLabel.includes('sigatoka')) {
+      // 🦠 SIGATOKA — Sigatoka Negra / Amarilla
+      currentDiagnosis = 'Sigatoka';
+      resultIcon.textContent = '🦠';
+      resultTitle.textContent = 'Sigatoka (Negra / Amarilla)';
+      resultContainer.classList.add('res-sigatoka-bg');
+      resultTitle.classList.add('res-sigatoka');
+      resultRecommendation.innerHTML = `
+        <strong>🦠 Agente causal:</strong> <em>Pseudocercospora fijiensis</em> (Sigatoka negra) / <em>Pseudocercospora musae</em> (Sigatoka amarilla).<br><br>
+        <strong>Impacto:</strong> Enfermedad foliar más destructiva y económicamente devastadora en plantaciones bananeras a nivel mundial. Reduce drásticamente el área fotosintética, provocando menor peso en el racimo y maduración prematura durante el transporte.<br><br>
+        <strong>Características visuales:</strong> Estrías cloróticas en hojas jóvenes que evolucionan hacia manchas oscuras y necróticas con centro gris y halo amarillo, marchitando grandes porciones de la hoja.<br><br>
+        <strong>⚠️ Recomendación agronómica:</strong>
+        <ul style="margin-top:8px; padding-left:20px;">
+          <li>Realizar <strong>cirugía foliar inmediata</strong> (deshoje sanitario y corte de puntas) para reducir la carga del inóculo fúngico.</li>
+          <li>Mantener una buena <strong>red de drenaje</strong> para disminuir la humedad relativa del lote.</li>
+          <li>Aplicar <strong>programa de control fungicida rotativo</strong> según recomendación de un ingeniero agrónomo.</li>
+        </ul>
+      `;
     }
-    else if (rawLabel.includes('dañad') || rawLabel.includes('enferm') || rawLabel.includes('sigatoka') || rawLabel.includes('mancha') || rawLabel.includes('quemadur')) { 
-      estado = 'dañada';
-      currentDiagnosis = 'Dañada';
-      resultIcon.textContent = '🔴';
-      resultTitle.textContent = 'Hoja Dañada';
-      resultContainer.classList.add('res-danada-bg');
-      resultTitle.classList.add('res-danada');
-      resultRecommendation.innerHTML = '<strong>Recomendación:</strong> ¡Alerta! Despacho inmediato del técnico fitosanitario para evaluar tratamiento o deshoje controlado.';
+    else if (rawLabel.includes('cordana')) {
+      // 🍂 CORDANA — Mancha de Cordana
+      currentDiagnosis = 'Cordana';
+      resultIcon.textContent = '🍂';
+      resultTitle.textContent = 'Mancha de Cordana';
+      resultContainer.classList.add('res-cordana-bg');
+      resultTitle.classList.add('res-cordana');
+      resultRecommendation.innerHTML = `
+        <strong>🍂 Agente causal:</strong> Hongo <em>Cordana musae</em> (a menudo asociado con <em>Deightoniella torulosa</em> o tras estrés abiótico).<br><br>
+        <strong>Características visuales:</strong> Manchas ovaladas o elípticas grandes, comúnmente localizadas en el borde de las láminas foliares o a lo largo de rasgaduras causadas por el viento. Centro color marrón claro o grisáceo rodeado de un halo amarillo intenso y bien delimitado.<br><br>
+        <strong>🔧 Recomendación agronómica:</strong>
+        <ul style="margin-top:8px; padding-left:20px;">
+          <li>Prolifera en zonas con <strong>exceso de humedad y poca ventilación</strong> (alta densidad de siembra o exceso de sombra).</li>
+          <li>Optimizar el <strong>deshoje de hojas viejas</strong>, controlar la maleza del piso y mejorar la aireación del cultivo.</li>
+          <li>Rara vez requiere fungicidas específicos si se maneja bien la ventilación.</li>
+        </ul>
+      `;
+    }
+    else if (rawLabel.includes('pestalotiopsis') || rawLabel.includes('pestalotia')) {
+      // 🍄 PESTALOTIOPSIS — Mancha foliar por Pestalotiopsis
+      currentDiagnosis = 'Pestalotiopsis';
+      resultIcon.textContent = '🍄';
+      resultTitle.textContent = 'Mancha foliar por Pestalotiopsis';
+      resultContainer.classList.add('res-pestalotiopsis-bg');
+      resultTitle.classList.add('res-pestalotiopsis');
+      resultRecommendation.innerHTML = `
+        <strong>🍄 Agente causal:</strong> Hongos oportunistas del género <em>Pestalotiopsis sp.</em><br><br>
+        <strong>Características visuales:</strong> Lesiones de color café oscuro a grisáceo que generalmente comienzan desde el ápice (la punta) o los bordes laterales de las hojas más maduras o viejas. A menudo avanza en forma de "V" hacia la nervadura central de la hoja.<br><br>
+        <strong>🔧 Recomendación agronómica:</strong>
+        <ul style="margin-top:8px; padding-left:20px;">
+          <li>Es un <strong>hongo oportunista</strong>: ataca plantas con deficiencias nutricionales, estrés hídrico o daños mecánicos previos.</li>
+          <li>Mejorar el <strong>plan de fertilización</strong> (especialmente potasio y silicio para reforzar las paredes celulares).</li>
+          <li>Evitar causar <strong>heridas mecánicas innecesarias</strong> a la planta y podar las partes necróticas.</li>
+        </ul>
+      `;
     }
     else {
-      // Si el modelo detecta que no es hoja o no coincide con los estados conocidos
-      estado = 'invalido';
+      // 🛡️ FILTRO DE EXCLUSIÓN — no_banano o label desconocido
       currentDiagnosis = 'No es hoja de banano';
-      resultIcon.textContent = '❓';
-      resultTitle.textContent = 'No parece una hoja de banano';
+      resultIcon.textContent = '⚠️';
+      resultTitle.textContent = 'Imagen no válida para diagnóstico';
       
-      // Estilos neutros (grises)
       resultContainer.style.backgroundColor = '#f1f5f9';
       resultContainer.style.borderColor = '#cbd5e1';
       resultTitle.style.color = '#475569';
       
-      resultRecommendation.innerHTML = `<strong>Aviso:</strong> El modelo detectó que esta imagen posiblemente no es una hoja de banano (Detectó: <em>${rawLabel}</em>). Por favor, intenta de nuevo con una foto clara y enfocada de la planta.`;
+      resultRecommendation.innerHTML = `
+        <strong>🛡️ Filtro de Validación:</strong> El algoritmo de validación colorimétrica determinó que esta imagen <strong>no corresponde a una hoja de banano</strong> (Detectó: <em>${rawLabel}</em>).<br><br>
+        La proporción clorofílica en canal RGB y el umbral de confianza no superaron los parámetros mínimos de validación.<br><br>
+        <strong>Sugerencia:</strong> Por favor, intenta de nuevo con una foto clara, enfocada y bien iluminada de una hoja de banano.
+      `;
       
       // Ocultar el botón de reporte porque no es un caso válido
       if (btnReport) {

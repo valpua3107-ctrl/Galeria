@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -87,12 +87,16 @@
       background-color: #2e7d32;
     }
 
-    .legend-dot.yellow {
-      background-color: #f9a825;
-    }
-
     .legend-dot.red {
       background-color: #c62828;
+    }
+
+    .legend-dot.orange {
+      background-color: #e65100;
+    }
+
+    .legend-dot.brown {
+      background-color: #6d4c41;
     }
 
     /* Estadísticas */
@@ -128,12 +132,16 @@
       color: #2e7d32;
     }
 
-    .stat-number.yellow {
-      color: #f9a825;
-    }
-
     .stat-number.red {
       color: #c62828;
+    }
+
+    .stat-number.orange {
+      color: #e65100;
+    }
+
+    .stat-number.brown {
+      color: #6d4c41;
     }
 
     .stat-number.total {
@@ -242,13 +250,16 @@
       <!-- Leyenda -->
       <div class="map-legend">
         <div class="legend-item">
-          <span class="legend-dot green"></span> Sana
+          <span class="legend-dot green"></span> Sana (Healthy)
         </div>
         <div class="legend-item">
-          <span class="legend-dot yellow"></span> Con Polvo
+          <span class="legend-dot red"></span> Sigatoka
         </div>
         <div class="legend-item">
-          <span class="legend-dot red"></span> Dañada
+          <span class="legend-dot orange"></span> Cordana
+        </div>
+        <div class="legend-item">
+          <span class="legend-dot brown"></span> Pestalotiopsis
         </div>
       </div>
 
@@ -260,15 +271,19 @@
         </div>
         <div class="stat-card">
           <div class="stat-number green" id="statSana">—</div>
-          <div class="stat-label">🟢 Sanas</div>
+          <div class="stat-label">✅ Sanas</div>
         </div>
         <div class="stat-card">
-          <div class="stat-number yellow" id="statPolvo">—</div>
-          <div class="stat-label">🟡 Con Polvo</div>
+          <div class="stat-number red" id="statSigatoka">—</div>
+          <div class="stat-label">🦠 Sigatoka</div>
         </div>
         <div class="stat-card">
-          <div class="stat-number red" id="statDanada">—</div>
-          <div class="stat-label">🔴 Dañadas</div>
+          <div class="stat-number orange" id="statCordana">—</div>
+          <div class="stat-label">🍂 Cordana</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number brown" id="statPestalotiopsis">—</div>
+          <div class="stat-label">🍄 Pestalotiopsis</div>
         </div>
       </div>
 

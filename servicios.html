@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Servicios y Solución - BananIA</title>
   <meta name="description"
-    content="Detalle de los servicios de clasificación por IA de hojas de banano: Sana, Con Polvo y Dañada para optimizar inspecciones agrícolas.">
+    content="BananaScan v2.0: Diagnóstico fitopatológico de hojas de banano con IA. Detecta Sigatoka, Cordana, Pestalotiopsis y hojas sanas. Dataset BananaLSD.">
   <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -62,41 +62,51 @@
       </div>
     </section>
 
-    <!-- Las 3 Categorías en Detalle -->
+    <!-- Las 4 Categorías Clínicas + Filtro -->
     <section class="section-header">
-      <h2>Clasificación en Tiempo Real</h2>
-      <p>Nuestro sistema escanea imágenes foliares y asigna de manera instantánea una de las tres categorías críticas de
-        acción agronómica.</p>
+      <h2>Clasificación Fitopatológica en Tiempo Real</h2>
+      <p>BananaScan v2.0 (Dataset BananaLSD) escanea imágenes foliares y diagnostica instantáneamente una de las cuatro categorías clínicas de acción agronómica.</p>
     </section>
 
     <div class="categories-grid">
       <article class="category-card sana">
-        <div class="cat-icon">🟢</div>
-        <h3>1. Hoja Sana</h3>
-        <p><strong>Criterio AI:</strong> Ausencia de manchas cloróticas, necrosis foliar o estrés abiótico severo.</p>
-        <p style="margin-top: 10px;"><strong>Acción recomendada:</strong> Mantener el régimen de fertilización estándar
-          e incorporar al registro de vitalidad del sector agrícola.</p>
+        <div class="cat-icon">✅</div>
+        <h3>1. Planta Sana (Healthy)</h3>
+        <p><strong>Estado:</strong> Hoja saludable sin evidencia de patógenos fúngicos activos ni necrosis foliar.</p>
+        <p style="margin-top: 10px;"><strong>Acción recomendada:</strong> Continuar con fertilización, riego balanceado y monitoreo fitosanitario preventivo para mantener la productividad del racimo.</p>
         <span class="cat-badge">✔ CERTIFICACIÓN VISUAL CORRECTA</span>
       </article>
 
-      <article class="category-card polvo">
-        <div class="cat-icon">🟤</div>
-        <h3>2. Hoja Con Polvo / Sedimento</h3>
-        <p><strong>Criterio AI:</strong> Presencia de partículas de polvo, tierra o residuos superficiales en el haz
-          foliar.</p>
-        <p style="margin-top: 10px;"><strong>Acción recomendada:</strong> Programar limpieza o riego foliar para evitar
-          obstrucción estomática y pérdida fotosintética.</p>
-        <span class="cat-badge">ℹ MANTENIMIENTO PREVENTIVO</span>
+      <article class="category-card sigatoka">
+        <div class="cat-icon">🦠</div>
+        <h3>2. Sigatoka (Negra / Amarilla)</h3>
+        <p><strong>Agente causal:</strong> <em>Pseudocercospora fijiensis / P. musae</em>. Enfermedad foliar más devastadora en plantaciones bananeras a nivel mundial.</p>
+        <p style="margin-top: 10px;"><strong>Acción recomendada:</strong> Cirugía foliar inmediata (deshoje sanitario), mantenimiento de red de drenaje y aplicación de programa fungicida rotativo.</p>
+        <span class="cat-badge">⚠ PRIORIDAD DE INSPECCIÓN CRÍTICA</span>
       </article>
 
-      <article class="category-card danada">
-        <div class="cat-icon">🔴</div>
-        <h3>3. Hoja Dañada</h3>
-        <p><strong>Criterio AI:</strong> Detección de estrías, pérdida de tejido, lesiones por hongos o ataque severo de
-          plagas foliares.</p>
-        <p style="margin-top: 10px;"><strong>Acción recomendada:</strong> Despacho inmediato del técnico fitosanitario
-          para evaluar tratamiento o deshoje controlado.</p>
-        <span class="cat-badge">⚠ PRIORIDAD DE INSPECCIÓN ALTA</span>
+      <article class="category-card cordana">
+        <div class="cat-icon">🍂</div>
+        <h3>3. Mancha de Cordana</h3>
+        <p><strong>Agente causal:</strong> Hongo <em>Cordana musae</em>. Manchas ovaladas grandes con centro grisáceo y halo amarillo intenso, en bordes o rasgaduras foliares.</p>
+        <p style="margin-top: 10px;"><strong>Acción recomendada:</strong> Optimizar deshoje de hojas viejas, controlar maleza y mejorar aireación del cultivo. Rara vez requiere fungicidas específicos.</p>
+        <span class="cat-badge">🔧 MANEJO DE VENTILACIÓN</span>
+      </article>
+
+      <article class="category-card pestalotiopsis">
+        <div class="cat-icon">🍄</div>
+        <h3>4. Pestalotiopsis</h3>
+        <p><strong>Agente causal:</strong> Hongos oportunistas <em>Pestalotiopsis sp.</em> Lesiones café oscuro que avanzan en forma de "V" desde el ápice foliar.</p>
+        <p style="margin-top: 10px;"><strong>Acción recomendada:</strong> Mejorar fertilización (potasio y silicio), evitar heridas mecánicas y podar partes necróticas.</p>
+        <span class="cat-badge">🔧 REFORZAR NUTRICIÓN</span>
+      </article>
+
+      <article class="category-card filtro">
+        <div class="cat-icon">🛡️</div>
+        <h3>Filtro: No Banano</h3>
+        <p><strong>Validación colorimétrica:</strong> Análisis de proporción clorofílica en canal RGB y umbral de confianza para descartar imágenes que no sean hojas de banano.</p>
+        <p style="margin-top: 10px;"><strong>Resultado:</strong> Muestra un aviso de que la imagen no es válida para diagnóstico, evitando falsos positivos.</p>
+        <span class="cat-badge">🛡️ FILTRO DE EXCLUSIÓN ACTIVO</span>
       </article>
     </div>
 
@@ -123,19 +133,50 @@
 
       <article class="value-card">
         <div class="value-icon">📊</div>
-        <h3>3. Clasificación Inmediata</h3>
-        <p>En menos de un segundo se emite el diagnóstico categorizado: Sana, Con Polvo o Dañada.</p>
+        <h3>3. Diagnóstico Fitopatológico</h3>
+        <p>En menos de un segundo se emite el diagnóstico categorizado: Sana, Sigatoka, Cordana o Pestalotiopsis.</p>
       </article>
 
       <article class="value-card">
         <div class="value-icon">🎯</div>
-        <h3>4. Acción Priorizada</h3>
-        <p>El equipo técnico optimiza su tiempo atendiendo prioritariamente los lotes con mayor incidencia de hojas
-          dañadas.</p>
+        <h3>4. Acción Agronómica Priorizada</h3>
+        <p>El equipo técnico atiende prioritariamente los lotes con mayor incidencia de Sigatoka u otras patologías detectadas por el modelo.</p>
       </article>
     </div>
 
-  
+    <!-- Simulador Interactivo BananaScan v2.0 -->
+    <section class="interactive-scanner">
+      <div class="scanner-grid">
+        <div class="scanner-info">
+          <span class="card-tag" style="background: rgba(255,255,255,0.15); color: #fff;">Prueba en Vivo</span>
+          <h3>Simulación de Diagnóstico Fitopatológico</h3>
+          <p>Prueba el clasificador inteligente BananaScan v2.0 seleccionando las diferentes patologías para ver cómo responde la interfaz agronómica en campo.</p>
+          <div class="scanner-controls">
+            <button class="scan-btn active" data-mode="sana">✅ Sana</button>
+            <button class="scan-btn" data-mode="sigatoka">🦠 Sigatoka</button>
+            <button class="scan-btn" data-mode="cordana">🍂 Cordana</button>
+            <button class="scan-btn" data-mode="pestalotiopsis">🍄 Pestalotiopsis</button>
+          </div>
+        </div>
+
+        <div class="scanner-demo-box">
+          <div class="leaf-preview" id="leafPreview">
+            <svg class="leaf-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path id="leafSvgPath" d="M15 85C20 40 45 15 85 15C85 15 75 55 45 75C30 85 15 85 15 85Z" fill="#4caf50"
+                opacity="0.9" />
+              <path d="M15 85L85 15" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" opacity="0.6" />
+            </svg>
+            <div class="scan-laser"></div>
+          </div>
+          <div class="scan-result-panel">
+            <span class="scan-result-title" id="scanResultTitle">Diagnóstico IA completado en 0.4s (Confianza: 98.2%)</span>
+            <span class="scan-result-badge" id="scanResultBadge" style="background-color: #e8f5e9; color: #2e7d32;">✅ PLANTA SANA (HEALTHY)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
   <!-- ==========================================================================
        PIE DE PÁGINA (FOOTER) REUTILIZABLE
        ========================================================================== -->

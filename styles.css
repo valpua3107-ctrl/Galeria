@@ -888,11 +888,12 @@ body {
 }
 
 /* ==========================================================================
-   TARJETAS DE CATEGORÍAS IA (SANA / POLVO / DAÑADA)
+   TARJETAS DE CATEGORÍAS IA — BananaScan v2.0
+   (HEALTHY / SIGATOKA / CORDANA / PESTALOTIOPSIS + FILTRO)
    ========================================================================== */
 .categories-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
   gap: 26px;
   margin-bottom: 80px;
 }
@@ -913,11 +914,18 @@ body {
 .category-card.sana {
   border-left: 4px solid #4caf50;
 }
-.category-card.polvo {
-  border-left: 4px solid #8d6e63;
-}
-.category-card.danada {
+.category-card.sigatoka {
   border-left: 4px solid #f44336;
+}
+.category-card.cordana {
+  border-left: 4px solid #ff6d00;
+}
+.category-card.pestalotiopsis {
+  border-left: 4px solid #6d4c41;
+}
+.category-card.filtro {
+  border-left: 4px solid #90a4ae;
+  background: var(--color-light-gray);
 }
 .cat-icon {
   font-size: 2.2rem;
@@ -941,8 +949,10 @@ body {
   font-weight: 600;
 }
 .sana .cat-badge { color: #2e7d32; }
-.polvo .cat-badge { color: #5d4037; }
-.danada .cat-badge { color: #c62828; }
+.sigatoka .cat-badge { color: #c62828; }
+.cordana .cat-badge { color: #e65100; }
+.pestalotiopsis .cat-badge { color: #4e342e; }
+.filtro .cat-badge { color: #546e7a; }
 
 /* ==========================================================================
    PROPUESTA DE VALOR / VALUE PROPOSITION GRID

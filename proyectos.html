@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -61,22 +61,18 @@
       </div>
     </section>
 
-    <!-- Estado Actual / Limitaciones Transparentes -->
+    <!-- Estado Actual / Logros del Modelo v2.0 -->
     <section class="comparison-grid" style="grid-template-columns: 1fr;">
-      <article class="comparison-card" style="border-top: 5px solid #d99a4e;">
-        <span class="card-tag" style="background: #fff3e0; color: #e65100;">Fase de Prototipo Funcional</span>
-        <h3>Estado Actual & Limitaciones del Modelo</h3>
+      <article class="comparison-card" style="border-top: 5px solid var(--color-olive-green);">
+        <span class="card-tag" style="background: var(--color-pastel-green); color: var(--color-olive-dark);">Especialización Fitopatológica (v2.0)</span>
+        <h3>Estado Actual & Logros del Modelo BananaScan v2.0</h3>
         <p style="font-size: 1.05rem; line-height: 1.8; color: var(--color-text-dark);">
-          Actualmente, <strong>BananIA se encuentra en fase de prototipo validado</strong> en condiciones de finca.
-          Nuestro modelo clasifica con alta velocidad y consistencia entre las categorías de: <em>Hoja Sana</em>,
-          <em>Hoja Con Polvo</em> y <em>Hoja Dañada</em>.
+          Hemos logrado un hito fundamental al actualizar nuestro motor neuro-visual a <strong>BananaScan v2.0</strong>, entrenado con el dataset de especialización <strong>BananaLSD</strong>.
+          El modelo superó la clasificación de deterioro general para diagnosticar con precisión <strong>4 categorías foliares y fitopatológicas</strong>: <em>Planta Sana</em>,
+          <em>Sigatoka (Negra/Amarilla)</em>, <em>Mancha de Cordana</em> y <em>Pestalotiopsis</em>.
         </p>
         <p style="font-size: 1.02rem; line-height: 1.8; color: var(--color-text-muted);">
-          <strong>Limitación actual:</strong> El modelo aún no identifica con precisión del 100% enfermedades
-          específicas (por ejemplo, distinguir de forma aislada entre <em>Sigatoka negra</em>, <em>Moko</em> u otras
-          patologías bacterianas o fúngicas puntuales); por ahora clasifica de forma general el deterioro foliar. El
-          siguiente paso natural en nuestra investigación es entrenar la arquitectura con miles de imágenes etiquetadas
-          clínicamente por enfermedad específica para elevar la resolución diagnóstica.
+          <strong>🛡️ Innovación en Validación:</strong> Además del diagnóstico de enfermedades, incorporamos un <strong>filtro de exclusión inteligente (`no_banano`)</strong> que utiliza validación colorimétrica en canal RGB y umbrales de confianza para evitar falsos positivos con rostros, suelo u objetos ajenos al cultivo. Estamos en proceso continuo de ampliación del dataset con miles de nuevas muestras de campo para seguir elevando la robustez en fincas de exportación.
         </p>
       </article>
     </section>
@@ -88,38 +84,24 @@
     </section>
 
     <div class="timeline">
-      <!-- Hito 1: Actual -->
+      <!-- Hito 1: Superado -->
+      <article class="timeline-item">
+        <div class="timeline-dot" style="background-color: var(--color-olive-green);"></div>
+        <div class="timeline-content">
+          <span class="timeline-badge" style="background-color: var(--color-pastel-green); color: var(--color-olive-dark);">FASE 1 — SUPERADA</span>
+          <h3>Prototipo de Clasificación General</h3>
+          <p>Implementación inicial del motor de IA que permitía una discriminación básica entre hoja sana, polvo superficial y daño general. Sentó las bases computacionales del proyecto en la UTMACH.</p>
+        </div>
+      </article>
+
+      <!-- Hito 2: Actual -->
       <article class="timeline-item current">
         <div class="timeline-dot"></div>
         <div class="timeline-content">
-          <span class="timeline-badge">FASE 1 — ESTADO ACTUAL</span>
-          <h3>Prototipo de Clasificación General</h3>
-          <p>Implementación funcional del motor de IA para discriminación rápida entre hoja sana, con acumulación de
-            polvo superficial o con presencia visible de daño o deterioro en campo por causa de enfermedades.</p>
-          <p><em>Fuente: Las imagenes se recaudaron de la Facultad de Agropecuaria en la Universidad Técnica de Machala
-              (UTMACH) durante el desarrollo del proyecto.</em></p>
-        </div>
-      </article>
-
-      <!-- Hito 2 -->
-      <article class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <span class="timeline-badge">FASE 2 — PRÓXIMO PASO</span>
-          <h3>Etiquetado Clínico con Fitopatólogos</h3>
-          <p>Recolección sistemática y curación de base de datos foliar colaborando con centros de investigación y
-            patólogos vegetales para anotar síntomas tempranos de patologías bananeras.</p>
-        </div>
-      </article>
-
-      <!-- Hito 3 -->
-      <article class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <span class="timeline-badge">FASE 3 — EVOLUCIÓN</span>
-          <h3>Detección Específica por Enfermedad</h3>
-          <p>Capacidad de diferenciar con alta precisión diagnóstica entre Sigatoka negra (<em>Mycosphaerella
-              fijiensis</em>), Moko bacteriano (<em>Ralstonia solanacearum</em>) y estrés fúngico foliar.</p>
+          <span class="timeline-badge">FASE 2 / 3 — ESTADO ACTUAL (BananaScan v2.0)</span>
+          <h3>Especialización Fitopatológica (Dataset BananaLSD)</h3>
+          <p>Desarrollo y despliegue del modelo v2.0 capaz de diagnosticar patologías específicas: <em>Sigatoka</em> (Pseudocercospora fijiensis/musae), <em>Mancha de Cordana</em> (Cordana musae) y <em>Pestalotiopsis</em>, integrando además el filtro de exclusión de especie.</p>
+          <p><em>Fuente: Las imágenes se recaudaron y curaron con colaboración técnica en la Facultad de Agropecuaria de la Universidad Técnica de Machala (UTMACH).</em></p>
         </div>
       </article>
 

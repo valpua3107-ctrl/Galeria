@@ -240,27 +240,35 @@ function initBananIASimulator() {
   const demoStates = {
     sana: {
       titulo: 'Diagnóstico IA completado en 0.4s (Confianza: 98.2%)',
-      badgeText: '🟢 HOJA SANA',
+      badgeText: '✅ PLANTA SANA (HEALTHY)',
       badgeBg: '#e8f5e9',
       badgeColor: '#2e7d32',
       leafColor: '#4caf50',
       bgGrad: 'radial-gradient(circle at center, #2e4d28 0%, #152414 100%)'
     },
-    polvo: {
-      titulo: 'Diagnóstico IA completado en 0.5s (Confianza: 94.7%)',
-      badgeText: '🟤 CON POLVO / SEDIMENTO',
-      badgeBg: '#efebe9',
-      badgeColor: '#5d4037',
-      leafColor: '#8d6e63',
-      bgGrad: 'radial-gradient(circle at center, #4e3d34 0%, #211915 100%)'
-    },
-    danada: {
+    sigatoka: {
       titulo: 'Diagnóstico IA completado en 0.3s (Confianza: 96.8%)',
-      badgeText: '🔴 DAÑADA (ALERTA FITOSANITARIA)',
+      badgeText: '🦠 SIGATOKA (ALERTA CRÍTICA)',
       badgeBg: '#fceceb',
       badgeColor: '#c62828',
       leafColor: '#ef5350',
       bgGrad: 'radial-gradient(circle at center, #572928 0%, #261211 100%)'
+    },
+    cordana: {
+      titulo: 'Diagnóstico IA completado en 0.4s (Confianza: 93.5%)',
+      badgeText: '🍂 MANCHA DE CORDANA',
+      badgeBg: '#fff3e0',
+      badgeColor: '#e65100',
+      leafColor: '#ff8f00',
+      bgGrad: 'radial-gradient(circle at center, #5d3a1a 0%, #2a1a0c 100%)'
+    },
+    pestalotiopsis: {
+      titulo: 'Diagnóstico IA completado en 0.5s (Confianza: 91.3%)',
+      badgeText: '🍄 PESTALOTIOPSIS',
+      badgeBg: '#efebe9',
+      badgeColor: '#4e342e',
+      leafColor: '#8d6e63',
+      bgGrad: 'radial-gradient(circle at center, #4e3d34 0%, #211915 100%)'
     }
   };
 

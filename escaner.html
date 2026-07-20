@@ -1,10 +1,10 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Escáner IA - BananIA</title>
-  <meta name="description" content="Detección de daños en plantas de banano - El Oro, Ecuador. Escanea o sube una foto para obtener un diagnóstico en tiempo real.">
+  <title>BananaScan v2.0 - Diagnóstico Foliar IA</title>
+  <meta name="description" content="BananaScan v2.0: Diagnóstico fitopatológico inteligente de hojas de banano. Detecta Sigatoka, Cordana, Pestalotiopsis y hojas sanas con IA.">
   <link rel="stylesheet" href="styles.css">
   <style>
     /* Estilos específicos para el escáner */
@@ -19,7 +19,6 @@
       border: 1px solid rgba(175, 155, 137, 0.15);
       text-align: center;
       box-sizing: border-box;
-
     }
     .upload-area {
       border: 2px dashed rgba(112, 128, 106, 0.4);
@@ -139,10 +138,12 @@
     /* Estilos específicos de resultados */
     .res-sana { color: #2e7d32; }
     .res-sana-bg { background-color: #e8f5e9; border-color: #c8e6c9; }
-    .res-polvo { color: #5d4037; }
-    .res-polvo-bg { background-color: #efebe9; border-color: #d7ccc8; }
-    .res-danada { color: #c62828; }
-    .res-danada-bg { background-color: #fceceb; border-color: #ffcdd2; }
+    .res-sigatoka { color: #c62828; }
+    .res-sigatoka-bg { background-color: #fceceb; border-color: #ffcdd2; }
+    .res-cordana { color: #e65100; }
+    .res-cordana-bg { background-color: #fff3e0; border-color: #ffe0b2; }
+    .res-pestalotiopsis { color: #4e342e; }
+    .res-pestalotiopsis-bg { background-color: #efebe9; border-color: #d7ccc8; }
     
     /* Botón reporte */
     .btn-report {
@@ -196,10 +197,10 @@
 
   <main class="main-content">
     <section class="hero-section" style="margin-bottom: 30px;">
-      <div class="hero-badge">📷 Análisis Fitosanitario Inteligente</div>
-      <h1>Escáner BananIA</h1>
-      <p style="font-size: 1.2rem; font-weight: 500; color: var(--color-olive-dark);">Detección de daños en plantas de banano - El Oro, Ecuador</p>
-      <p style="max-width: 700px; margin: 10px auto;">Sube una foto o abre la cámara de tu celular para evaluar instantáneamente el estado de la hoja de banano.</p>
+      <div class="hero-badge">🔬 BananaScan v2.0 — Dataset BananaLSD</div>
+      <h1>Escáner Fitopatológico IA</h1>
+      <p style="font-size: 1.2rem; font-weight: 500; color: var(--color-olive-dark);">Diagnóstico foliar inteligente · 4 categorías clínicas · El Oro, Ecuador</p>
+      <p style="max-width: 700px; margin: 10px auto;">Sube una foto de la hoja de banano para detectar automáticamente <strong>Sigatoka</strong>, <strong>Cordana</strong>, <strong>Pestalotiopsis</strong> o confirmar una <strong>planta sana</strong>.</p>
     </section>
 
     <div class="scanner-app-container">

@@ -17,8 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const mapLoader = document.getElementById('mapLoader');
   const statTotal = document.getElementById('statTotal');
   const statSana = document.getElementById('statSana');
-  const statPolvo = document.getElementById('statPolvo');
-  const statDanada = document.getElementById('statDanada');
+  const statSigatoka = document.getElementById('statSigatoka');
+  const statCordana = document.getElementById('statCordana');
+  const statPestalotiopsis = document.getElementById('statPestalotiopsis');
 
   // ========================================================================
   // INICIALIZAR LEAFLET - Centrado en El Oro, Ecuador
@@ -37,21 +38,23 @@ document.addEventListener('DOMContentLoaded', () => {
   let markersLayer = L.layerGroup().addTo(map);
 
   // ========================================================================
-  // CREAR MARCADOR CON COLOR SEGÚN DIAGNÓSTICO
+  // CREAR MARCADOR CON COLOR SEGÚN DIAGNÓSTICO (BananaScan v2.0)
   // ========================================================================
   function getMarkerColor(diagnostico) {
     const diag = (diagnostico || '').toLowerCase();
-    if (diag.includes('sana')) return '#2e7d32';       // Verde
-    if (diag.includes('polvo')) return '#f9a825';       // Amarillo
-    if (diag.includes('dañada') || diag.includes('danada')) return '#c62828'; // Rojo
+    if (diag.includes('sana') || diag.includes('healthy')) return '#2e7d32';       // Verde
+    if (diag.includes('sigatoka') || diag.includes('dañada') || diag.includes('danada')) return '#c62828'; // Rojo
+    if (diag.includes('cordana') || diag.includes('polvo')) return '#e65100';        // Naranja
+    if (diag.includes('pestalotiopsis') || diag.includes('pestalotia')) return '#6d4c41'; // Marrón
     return '#78909c'; // Gris para desconocidos
   }
 
   function getMarkerEmoji(diagnostico) {
     const diag = (diagnostico || '').toLowerCase();
-    if (diag.includes('sana')) return '🟢';
-    if (diag.includes('polvo')) return '🟡';
-    if (diag.includes('dañada') || diag.includes('danada')) return '🔴';
+    if (diag.includes('sana') || diag.includes('healthy')) return '✅';
+    if (diag.includes('sigatoka') || diag.includes('dañada') || diag.includes('danada')) return '🦠';
+    if (diag.includes('cordana') || diag.includes('polvo')) return '🍂';
+    if (diag.includes('pestalotiopsis') || diag.includes('pestalotia')) return '🍄';
     return '⚪';
   }
 
@@ -95,20 +98,22 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ========================================================================
-  // ACTUALIZAR ESTADÍSTICAS
+  // ACTUALIZAR ESTADÍSTICAS (BananaScan v2.0)
   // ========================================================================
   function updateStats(reportes) {
-    let sanas = 0, polvo = 0, danadas = 0;
+    let sanas = 0, sigatoka = 0, cordana = 0, pestalotiopsis = 0;
     reportes.forEach(r => {
       const diag = (r.diagnostico || '').toLowerCase();
-      if (diag.includes('sana')) sanas++;
-      else if (diag.includes('polvo')) polvo++;
-      else if (diag.includes('dañada') || diag.includes('danada')) danadas++;
+      if (diag.includes('sana') || diag.includes('healthy')) sanas++;
+      else if (diag.includes('sigatoka') || diag.includes('dañada') || diag.includes('danada')) sigatoka++;
+      else if (diag.includes('cordana') || diag.includes('polvo')) cordana++;
+      else if (diag.includes('pestalotiopsis') || diag.includes('pestalotia')) pestalotiopsis++;
     });
-    statTotal.textContent = reportes.length;
-    statSana.textContent = sanas;
-    statPolvo.textContent = polvo;
-    statDanada.textContent = danadas;
+    if (statTotal) statTotal.textContent = reportes.length;
+    if (statSana) statSana.textContent = sanas;
+    if (statSigatoka) statSigatoka.textContent = sigatoka;
+    if (statCordana) statCordana.textContent = cordana;
+    if (statPestalotiopsis) statPestalotiopsis.textContent = pestalotiopsis;
   }
 
   // ========================================================================
