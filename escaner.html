@@ -211,10 +211,15 @@
         <input type="file" id="imageInput" accept="image/*" capture="environment" style="display: none;">
         <div class="upload-icon">📸</div>
         <h3 class="upload-text">Sube una imagen de la hoja</h3>
-        <!-- 1. El botón tiene un ID claro ('btnCustomUpload') para fácil estilización -->
-        <button id="btnCustomUpload" class="btn btn-primary" style="margin-top: 15px; width: 100%; justify-content: center;">
-          Abrir Cámara o Explorador
-        </button>
+        <!-- 1. Botones separados para cámara y galería -->
+        <div class="btn-group" style="margin-top: 15px; width: 100%; display: flex; gap: 10px;">
+          <button id="btnCameraUpload" class="btn btn-primary" style="flex: 1; justify-content: center; padding: 12px 10px;">
+            📷 Tomar Foto
+          </button>
+          <button id="btnGalleryUpload" class="btn btn-secondary" style="flex: 1; justify-content: center; padding: 12px 10px;">
+            🖼️ Subir Galería
+          </button>
+        </div>
         <!-- Elemento de texto para mostrar el nombre del archivo -->
         <p id="fileNameDisplay" style="margin-top: 15px; font-weight: bold; color: var(--color-olive-dark);">Ningún archivo seleccionado</p>
       </div>

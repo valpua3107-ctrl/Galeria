@@ -25,7 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const uploadArea = document.getElementById('uploadArea');
   const imageInput = document.getElementById('imageInput');
-  const btnCustomUpload = document.getElementById('btnCustomUpload');
+  const btnCameraUpload = document.getElementById('btnCameraUpload');
+  const btnGalleryUpload = document.getElementById('btnGalleryUpload');
   const fileNameDisplay = document.getElementById('fileNameDisplay');
   const imagePreviewContainer = document.getElementById('imagePreviewContainer');
   const imagePreview = document.getElementById('imagePreview');
@@ -40,8 +41,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnReport = document.getElementById('btnReport');
   const reportFeedback = document.getElementById('reportFeedback');
 
-  if (!btnCustomUpload) {
-    console.error("Falta btnCustomUpload en el HTML");
+  if (!btnCameraUpload || !btnGalleryUpload) {
+    console.error("Faltan botones de subida en el HTML");
     return;
   }
   if (!imageInput) {
@@ -53,8 +54,15 @@ document.addEventListener('DOMContentLoaded', () => {
   // MANEJO DE SUBIDA DE IMÁGENES
   // ==========================================================================
   
-  btnCustomUpload.addEventListener('click', () => {
-    console.log("Clic en botón personalizado. Abriendo explorador...");
+  btnCameraUpload.addEventListener('click', () => {
+    console.log("Abriendo cámara...");
+    imageInput.setAttribute('capture', 'environment');
+    imageInput.click();
+  });
+
+  btnGalleryUpload.addEventListener('click', () => {
+    console.log("Abriendo galería...");
+    imageInput.removeAttribute('capture');
     imageInput.click();
   });
 
